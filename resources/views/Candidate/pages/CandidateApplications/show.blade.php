@@ -45,16 +45,18 @@
       <div class="pt-3">
         <h6 class="fw-semibold small text-uppercase text-white mb-1">Required Skills</h6>
         <div class="d-flex flex-wrap gap-1 mb-3">
-          @foreach($application->job->required_skills as $skill)
-            @if(in_array($skill, $application->skills))
-              <span class="badge bg-success text-white small">
-                {{ ucfirst($skill) }}
-              </span>
-            @else
-              <span class="badge bg-danger text-white small">
-                {{ ucfirst($skill) }}
-              </span>
-            @endif
+          @php
+            $requiredSkills = is_array($application->job->required_skills) 
+                              ? $application->job->required_skills 
+                              : explode(',', $application->job->required_skills ?? '');
+            $userSkills = is_array($application->skills) 
+                          ? $application->skills 
+                          : explode(',', $application->skills ?? '');
+          @endphp
+          @foreach($requiredSkills as $skill)
+            <span class="badge {{ in_array($skill, $userSkills) ? 'bg-success' : 'bg-danger' }} text-white small">
+              {{ ucfirst($skill) }}
+            </span>
           @endforeach
         </div>
       </div>
@@ -138,17 +140,24 @@
           <li>
             <i class="bi bi-file-earmark-text-fill me-1"></i>
             <strong>Resume:</strong>
-            <a href="{{ asset('storage/' . $application->resume) }}" target="_blank">Download</a>
+            <a href="{{ asset('storage/' . $application->resume_path) }}" target="_blank">Download</a>
           </li>
-          @if(!empty($application->other_docs))
-            @foreach($application->other_docs as $doc)
+
+          @php
+            $otherDocs = is_array($application->other_docs_paths) 
+                         ? $application->other_docs_paths 
+                         : explode(',', $application->other_docs_paths ?? '');
+          @endphp
+
+          @foreach($otherDocs as $doc)
+            @if(!empty($doc))
               <li>
                 <i class="bi bi-file-earmark-text-fill me-1"></i>
                 <strong>Other Document:</strong>
                 <a href="{{ asset('storage/' . $doc) }}" target="_blank">Download</a>
               </li>
-            @endforeach
-          @endif
+            @endif
+          @endforeach
         </ul>
       </div>
     </div>

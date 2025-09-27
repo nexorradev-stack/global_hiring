@@ -11,10 +11,11 @@
             <span class="material-icons-outlined fs-4 text-danger">close</span>
         </button>
     </div>
-
+ 
     <nav class="sidebar-nav">
         <ul class="metismenu list-unstyled" id="sidenav">
 
+            
             {{-- Dashboard --}}
             <li class="nav-item"> <a href="{{ route('agent.dashboard') }}"
                     class="nav-link d-flex align-items-center {{ request()->routeIs('agent.dashboard') ? 'active bg-primary text-white' : '' }}">

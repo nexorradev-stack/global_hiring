@@ -42,7 +42,7 @@ class Application extends Model
         'date_of_birth'       => 'date',
         'graduation_date'     => 'date',
         'years_experience'    => 'integer',
-        'other_docs_paths'    => 'array',
+        'other_docs'    => 'array',
         'skills'              => 'array',
         'status'              => 'string',
         
