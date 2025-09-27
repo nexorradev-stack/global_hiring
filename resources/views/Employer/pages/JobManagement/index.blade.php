@@ -1,7 +1,9 @@
 @extends('employer.layouts.app')
 
 @section('title', 'Jobs List')
-
+<style>
+    
+</style>
 @push('css/links')
     <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 @endpush
@@ -81,6 +83,7 @@
                     '<"row mt-3"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                 // optional: preserve Bootstrap styling
                 renderer: 'bootstrap'
+                scrollX: false,
             });
         });
     </script>

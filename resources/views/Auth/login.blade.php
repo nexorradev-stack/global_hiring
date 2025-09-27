@@ -106,7 +106,7 @@
                                     {{ session('error') }}
                                 </div>
                             @endif
-                            <div class="mb-4 small">
+                            {{-- <div class="mb-4 small">
                                 <label class="form-label fw-bold d-block text-center mb-3">Quick Login As</label>
                                 <div class="row g-3 text-center">
                                     <div class="col-6 col-md-3">
@@ -146,7 +146,7 @@
                                             data-email="c2@c" data-password="c2">Candidate2</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                             <form method="POST" action="{{ route('login') }}" class="row g-3" id="login-form">
     

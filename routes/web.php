@@ -12,7 +12,9 @@ use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\AdminAgentsController;
 use App\Http\Controllers\Employer\EmployerController;
 use App\Http\Controllers\Candidate\CandidateController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminEmployersController;
+use App\Http\Controllers\Agent\AgentDashboardController;
 use App\Http\Controllers\Agent\AgentInterviewsController;
 use App\Http\Controllers\Employer\EmployerJobsController;
 use App\Http\Controllers\Agent\AgentApplicationsController;
@@ -20,8 +22,10 @@ use App\Http\Controllers\Candidate\CandidateJobsController;
 use App\Http\Controllers\Candidate\CandidateVisaController;
 use App\Http\Controllers\Agent\AgentFlightScheduleController;
 use App\Http\Controllers\Employer\EmployerContractsController;
+use App\Http\Controllers\Employer\EmployerDashboardController;
 use App\Http\Controllers\Employer\EmployerInterviewsController;
 use App\Http\Controllers\Candidate\CandidateContractsController;
+use App\Http\Controllers\Candidate\CandidateDashboardController;
 use App\Http\Controllers\Candidate\CandidateInterviewController;
 use App\Http\Controllers\Candidate\CandidateApplicationController;
 use App\Http\Controllers\Candidate\CandidateFlightScheduleController;
@@ -33,7 +37,7 @@ use App\Http\Controllers\Candidate\CandidateFlightScheduleController;
 
 // Default route
 Route::get('/', function () {
-     return view('welcome');
+     return view('auth.login');
 });
 
 
@@ -64,7 +68,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Routes
 Route::middleware(['auth', RoleMiddleware::class . ':admin'])->prefix('admin')->name('admin.')->group(function () {
-     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
      Route::resource('users', AdminUsersController::class)->except(['show']);
      Route::get('users/agents', [AdminAgentsController::class, 'index'])->name('users.agents.index');
      Route::get('users/employers', [AdminEmployersController::class, 'index'])->name('users.employers.index');
@@ -73,7 +77,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->prefix('admin')->
 
 // Employer Routes
 Route::middleware(['auth', RoleMiddleware::class . ':employer'])->prefix('employer')->name('employer.')->group(function () {
-     Route::get('dashboard', [EmployerController::class, 'index'])->name('dashboard');
+     Route::get('dashboard', [EmployerDashboardController::class, 'index'])->name('dashboard');
      Route::resource('jobs', EmployerJobsController::class);
      Route::get('interviews/passed', [EmployerInterviewsController::class, 'passed'])->name('interviews.passed');
      Route::patch('interviews/{id}/shortlist', [EmployerInterviewsController::class, 'shortlist'])->name('interviews.shortlist');
@@ -97,7 +101,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':employer'])->prefix('employ
 
 // Agent Routes
 Route::middleware(['auth', RoleMiddleware::class . ':agent'])->prefix('agent')->name('agent.')->group(function () {
-     Route::get('/dashboard', [AgentController::class, 'index'])->name('dashboard');
+     Route::get('/dashboard', [AgentDashboardController::class, 'index'])->name('dashboard');
      // applications
      Route::get('applications', [AgentApplicationsController::class, 'index'])->name('applications.index');
      Route::get('applications/{id}', [AgentApplicationsController::class, 'show'])->name('applications.show');
@@ -160,7 +164,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':agent'])->prefix('agent')->
 
 // Candidate Routes
 Route::middleware(['auth', RoleMiddleware::class . ':candidate'])->prefix('candidate')->name('candidate.')->group(function () {
-     Route::get('/dashboard', [CandidateController::class, 'index'])->name('dashboard');
+     Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('dashboard');
      Route::get('jobs', [CandidateJobsController::class, 'index'])->name('jobs.index');
      Route::get('jobs/{job}', [CandidateJobsController::class, 'show'])->name('jobs.show');
      Route::get('jobs/{id}/apply', [CandidateApplicationController::class, 'create'])->name('jobs.apply');

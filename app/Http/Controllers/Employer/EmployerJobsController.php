@@ -84,7 +84,8 @@ class EmployerJobsController extends Controller
 
         // decode JSON fields
         $job->required_skills = json_decode($job->required_skills, true) ?: [];
-        $job->agent_ids       = json_decode($job->agent_ids, true) ?: [];
+       $job->agent_ids = $job->agent_ids ?: [];
+
 
         $agents = User::where('role', 'agent')->get();
 

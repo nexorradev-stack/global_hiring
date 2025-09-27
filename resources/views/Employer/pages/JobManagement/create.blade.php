@@ -1,7 +1,11 @@
 @extends('employer.layouts.app')
 
 @section('title', isset($job) ? 'Edit Job Post' : 'Create New Job Post')
-
+<style>
+  body{
+    overflow-x: hidden
+  }
+</style>
 @section('content')
   <div class="container min-vh-100 d-flex flex-column">
     <main class="flex-grow-1">

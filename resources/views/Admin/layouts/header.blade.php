@@ -6,7 +6,7 @@
         <div class="search-bar flex-grow-1">
             <div class="position-relative">
                 <div class="d-lg-block d-none ms-3 welcome-message bg-light rounded-5 px-4 py-2">
-                    <h5 class="mb-0 text-white">
+                    <h5 class="mb-0 text-muted">
                         Welcome{{ auth()->check() ? ', ' . auth()->user()->name : '' }}
                     </h5>
                 </div>
@@ -96,17 +96,8 @@
                         </div>
                     </a>
                     <hr class="dropdown-divider" />
-                    <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
-                            class="material-icons-outlined">person_outline</i>Profile</a>
-                    <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
-                            class="material-icons-outlined">local_bar</i>Setting</a>
-                    <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
-                            class="material-icons-outlined">dashboard</i>Dashboard</a>
-                    <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
-                            class="material-icons-outlined">account_balance</i>Earning</a>
-                    <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
-                            class="material-icons-outlined">cloud_download</i>Downloads</a>
-                    <hr class="dropdown-divider" />
+                     
+                      
                     <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display: none;">
                         @csrf
                         @method('POST')
